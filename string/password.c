@@ -1,10 +1,9 @@
 #include<stdio.h>
 #define passwordsize 15
 #define errorsize 3
-int print_error_char(const char *pw,const int size)
+void print_error_char(const char *pw,const int size)
 {
 int i,j,m,l;
-
 char temp[errorsize]; 
     for(i=0;i<size-errorsize+1;i++)
     {
@@ -33,9 +32,47 @@ char temp[errorsize];
             }
         }
     }
-   return 0;
+   
 }
-
+int print_error_array(const char *pw,const int size)
+{
+int i,j,m,k,l,o,f,count;
+char temp[size]; 
+int sz=size/2;
+    for(i=0;i<size;i++)//i=1
+    {
+        for(f=0;f<sz;f++)//덩어리복사파트//편집점
+        {
+        
+        for(k=0;k<i+2;k++)//조각복사파트
+        {
+            temp[k]=pw[i+k+f];//
+            count++;
+        }
+        
+        for(o=0;o<size;o+count)//덩어리검사파트
+        {
+            for(m=0;m<count;m++)//조각검사파트
+            if(temp[m]==pw[m+o+count])
+            {
+                l++;//
+            }
+            if(l==count)
+            {
+                printf("'");
+                for(m=0;m<count;m++)
+                    printf("%c",temp[m]);                
+                printf("'\n");
+                break;
+            }
+            else
+            l=0;
+        }
+        }
+        
+    }
+    
+}
 void printarray(const char pw[])
 {
     int i;
@@ -80,7 +117,7 @@ char temp[errorsize];
             }
         }
     }
-;   return 0;
+   return 0;
 }
 
 
@@ -97,6 +134,7 @@ int main(void)
     scanf("%s",repeatpw);
     
     const pwsize = strsize(repeatpw);
+    print_error_array(repeatpw,pwsize);
     if(pwsize<7)
     {
         if(strsearch(repeatpw,pwsize)==0)
@@ -132,17 +170,19 @@ int main(void)
         {
         printf("비밀번호의 크기는 %d자리를 넘을수없습니다.\n",passwordsize);
         printf("현재 %d자리\n",pwsize);
+        
         }
         else
         {
         printf("연속된 세개의문자를 사용할수없습니다.\n");
         print_error_char(repeatpw,pwsize);
+        
         printf("비밀번호의 크기는 %d자리를 넘을수없습니다.\n",passwordsize);
         printf("현재 %d자리\n",pwsize);       
         } 
     
     
-        } 
+    } 
     
     
     }
