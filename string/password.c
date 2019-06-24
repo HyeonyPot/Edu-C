@@ -1,24 +1,41 @@
 #include<stdio.h>
 #define passwordsize 15
 #define errorsize 3
-void print_error_array(const char *pw,const int size)
+int print_error_char(const char *pw,const int size)
 {
-int i,j,m,l,k;
+int i,j,m,l;
+
 char temp[errorsize]; 
-    for(i=0;i<size-errorsize+1;)
+    for(i=0;i<size-errorsize+1;i++)
     {
-        for(k=0;k<errorsize;k++)
+        l=0;
+        for(m=0;m<errorsize;m++)
         {
-            temp[k]=pw[i];
+            temp[m]=pw[i];
         }
         for(m=0;m<errorsize;m++)
         { 
-            if(temp[m]=='\0')
+           
+            if(temp[m]==pw[i+m])
+            l++;
+            
+            else if(temp[m]=='\0')
             break;
+            if(l==3)
+            {
+                printf("'");
+                for(j=0;j<errorsize;j++)
+                {
+                    printf("%c",pw[i+j]);
+                }
+                printf("'\n");
+                break;
+            }
         }
     }
-   
+   return 0;
 }
+
 void printarray(const char pw[])
 {
     int i;
@@ -39,19 +56,31 @@ int strsize(char pw[])
 
 int strsearch(const char *pw,const int size)
 {
-    int i,j;
-    for(i=0;i<size;i++)
+int i,m,l;
+
+char temp[errorsize]; 
+    for(i=0;i<size-errorsize+1;i++)
     {
-        for(j=1+i;j<size-1;j++)
+        l=0;
+        for(m=0;m<errorsize;m++)
         {
-            if(pw[i]==pw[j]);
-            { 
-               if(pw[i]==pw[++j])    
-                return 1;
+            temp[m]=pw[i];
+        }
+        for(m=0;m<errorsize;m++)
+        { 
+           
+            if(temp[m]==pw[i+m])
+            l++;
+            
+            else if(temp[m]=='\0')
+            break;
+            if(l==3)
+            {
+               return 1;
             }
-        }   
+        }
     }
-    return 0;
+;   return 0;
 }
 
 
@@ -68,44 +97,56 @@ int main(void)
     scanf("%s",repeatpw);
     
     const pwsize = strsize(repeatpw);
-    
-    if(pwsize < passwordsize && strsearch(repeatpw,pwsize)==0)
-    {    
+    if(pwsize<7)
+    {
+        if(strsearch(repeatpw,pwsize)==0)
+        {
+        printf("비밀번호의 크기는 7자리 이상이어야 합니다.\n");
+        printf("현재 %d자리\n",pwsize);
+        }
+        else if(strsearch(repeatpw,pwsize)==1)
+        {
+        printf("비밀번호의 크기는 7자리 이상이어야 합니다.\n");
+        printf("현재 %d자리\n",pwsize);
+        printf("연속된 세개의문자를 사용할수없습니다.\n");
+        print_error_char(repeatpw,pwsize);
+        
+        }
+    }
+    else if(pwsize>=7)
+    {
+       if(pwsize < passwordsize && strsearch(repeatpw,pwsize)==0)
+        {    
         printf("사용할수있는 비밀번호입니다.\n");
         shutdown = 1;   
-    }
-    else if(pwsize < 7 && strsearch(repeatpw,pwsize)==0)
-    {
-        printf("비밀번호의 크기는 %d자리를 넘을수없습니다.\n",passwordsize);
-        printf("현재 %d자리\n",pwsize);
-    }
-    else if(pwsize < 7 && strsearch(repeatpw,pwsize)==1)
-    {
-        printf("비밀번호의 크기는 7자리를 넘어야합니다.\n");
-        printf("현재 %d자리\n",pwsize);
+        }
+    
+        else if(pwsize < passwordsize && strsearch(repeatpw,pwsize)==1)
+        {
         printf("연속된 세개의문자를 사용할수없습니다.\n");
-        print_error_array(repeatpw,pwsize);
-    }
-    else if(pwsize < passwordsize && strsearch(repeatpw,pwsize)==1)
-    {
-        printf("연속된 세개의문자를 사용할수없습니다.\n");
-        print_error_array(repeatpw,pwsize);
-    }
+        print_error_char(repeatpw,pwsize);
+        
+        }
 
-    else if(pwsize > passwordsize && strsearch(repeatpw,pwsize)==0)
-    {
+        else if(pwsize > passwordsize && strsearch(repeatpw,pwsize)==0)
+        {
         printf("비밀번호의 크기는 %d자리를 넘을수없습니다.\n",passwordsize);
         printf("현재 %d자리\n",pwsize);
-    }
-    else
-    {
+        }
+        else
+        {
         printf("연속된 세개의문자를 사용할수없습니다.\n");
-        print_error_array(repeatpw,pwsize);
+        print_error_char(repeatpw,pwsize);
         printf("비밀번호의 크기는 %d자리를 넘을수없습니다.\n",passwordsize);
         printf("현재 %d자리\n",pwsize);       
-    }
+        } 
     
-    }while(shutdown!=1);
+    
+        } 
+    
+    
+    }
+    while(shutdown!=1);
    
     return 0;
 }
