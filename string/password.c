@@ -63,7 +63,7 @@ int sz=size/2;
                 printf("'\n");
                 break;
             }
-            
+            l=0;
             
         }
         }
