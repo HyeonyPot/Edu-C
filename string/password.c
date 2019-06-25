@@ -39,9 +39,9 @@ int print_error_array(const char *pw,const int size)
 int i,j,m,k,l,o,f,count;
 char temp[size]; 
 int sz=size/2;
-    for(i=0;i<size;i++)//i=1
-    {
-        for(f=0;f<sz;f++)//덩어리복사파트//편집점
+    
+    
+        for(f=0,i=0;f<sz;f++,i++)//덩어리복사파트//편집점
         {
         
         for(k=0;k<i+2;k++)//조각복사파트
@@ -54,9 +54,7 @@ int sz=size/2;
         {
             for(m=0;m<count;m++)//조각검사파트
             if(temp[m]==pw[m+o+count])
-            {
-                l++;//
-            }
+                l++;
             if(l==count)
             {
                 printf("'");
@@ -70,7 +68,7 @@ int sz=size/2;
         }
         }
         
-    }
+    
     
 }
 void printarray(const char pw[])
