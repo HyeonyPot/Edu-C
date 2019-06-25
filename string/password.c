@@ -43,7 +43,7 @@ int sz=size/2;
     
         for(f=0,i=0;f<sz;f++,i++)//덩어리복사파트//편집점
         {
-        
+           l=0;
         for(k=0;k<i+2;k++)//조각복사파트
         {
             temp[k]=pw[i+k+f];//
@@ -63,8 +63,8 @@ int sz=size/2;
                 printf("'\n");
                 break;
             }
-            else
-            l=0;
+            
+            
         }
         }
         
