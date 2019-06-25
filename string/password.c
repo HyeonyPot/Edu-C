@@ -38,6 +38,7 @@ int print_error_array(const char *pw,const int size)
 {
 int i,j,m,k,l,o,f,count;
 char temp[size]; 
+int shutdown=0;
 int sz=size/2;
     
     
@@ -61,11 +62,14 @@ int sz=size/2;
                 for(m=0;m<count;m++)
                     printf("%c",temp[m]);                
                 printf("'\n");
+                shutdown=1;
                 break;
             }
             l=0;
             
         }
+        if(shutdown)
+        break;
         }
         
     
