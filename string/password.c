@@ -36,7 +36,7 @@ char temp[errorsize];
 }
 void print_error_array(const char *pw,const int size)
 {
-int i=0,m=0,k=0,l=0,f=0,count=0;
+int i=0,j=0,m=0,k=0,l=0,f=0,count=0;
 char temp[size]; 
 int sz=size/2;
 int cord=0;
@@ -51,27 +51,26 @@ int cord=0;
             {
                 temp[k]=pw[k+f+i-1];//조각복사위치결정
                 count++;
-            } printf("'");
-                for(m=0;m<k;m++)
-                    printf("%c",temp[m]);                
-                printf("'\n");
-             
-            /* for(m=0;m<k;m++)//조각검사파트
-              {if(temp[m]==pw[m+f+k])
+            } 
+            
+            
+            for(j=0;j<size-cord-1;j++) 
+            {for(m=0;m<count;m++)//조각검사파트
+              {if(temp[m]==pw[m+j+count])
                     l++;
               }
             
-            if(l==k)
+            if(l==count)
             {
                 printf("'");
-                for(m=0;m<k;m++)
+                for(m=0;m<count;m++)
                     printf("%c",temp[m]);                
                 printf("'\n");
                 
                 
             }
-             */
-            
+            l=0;
+            }
         }
         
     }    
